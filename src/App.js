@@ -1,14 +1,16 @@
 // import logo from './logo.svg';
 
 
-
+import React from "react";
+import { Header } from "./comp";
 function App() {
   return (
-    <div className="App">
-    <h1 className="text-3xl font-bold underline text-blue-600 w-screen h-screen flex items-center justify-center">
-    Hello world!
+
+    <h1 className=" w-screen h-auto flex flex-col ">
+
+    <Header />
   </h1>
-    </div>
+ 
   );
 }
 
