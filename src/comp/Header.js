@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Logo from "./ut.png";
-import {MdShoppingBasket, MdAdd , MdLogout} from 'react-icons/md';
+import Logo from "./food.png";
+import {MdShoppingBasket, MdAdd ,  MdLogout} from 'react-icons/md';
 import Avatar from "./avtar.png"
 import {  motion } from 'framer-motion';
 
@@ -31,10 +31,21 @@ const [isMenu, setIsMenu] = useState(false);
   else{
     setIsMenu(!isMenu)
   }
+    };
+
+    const logout = () => {
+      setIsMenu(false);
+      localStorage.clear();
   
-    }
+      dispatch({
+        type: actionType.SET_USER,
+        user: null,
+      });
+    };
+    
+ 
   return (
-    <header className=" fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16">
+    <header className=" fixed z-50 w-screen bg-primary p-3 px-4 md:p-6 md:px-16">
         {/*destop & tablet*/}
         <div className="hidden md:flex w-full h-full items-center justify-between ">
         <Link to={'/'} className='flex items-center gap-2'>
@@ -86,7 +97,9 @@ const [isMenu, setIsMenu] = useState(false);
         </Link>
       }
         <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
-        transition-all duration-100 ease-in-out text-textColor text-base'>Log out <MdLogout /></p>
+        transition-all duration-100 ease-in-out text-textColor text-base'
+        onClick={logout}
+        > Logout <MdLogout /></p>
        
        </motion.div>
       )
@@ -100,14 +113,20 @@ const [isMenu, setIsMenu] = useState(false);
 
         {/* mobile */}
         <div className="flex md:hidden w-full h-full item-center justify-between">
+       
+        <div className='relative flex items-center justify-center'>
+        <MdShoppingBasket className='text-textColor text-2xl  cursor-pointer' />
+        <div className=' absolute top-5 -right-2 w-5 h-5 rounded-full
+         bg-cartNumBg 
+        flex item-center justify-center'>
+        <p className='text-xs  text-white font-semibold'>2</p>
+        </div>
+        </div>
         <Link to={'/'} className='flex items-center gap-2'>
         <img src = {Logo} className="w-20 object-cover" alt ="logo"/>
         <p className='text-headingColor text-l '>onlineMEALS</p>
         </Link>
-        <div className='relative flex items-center justify-center'>
         
-        
-        </div>
         <div className='relative'>
         <motion.img whileTap={{scale :0.6}}
         src= {user ? user.photoURL : Avatar} className = " w-12 min-w-[40px] h-12 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full" 
@@ -124,26 +143,36 @@ const [isMenu, setIsMenu] = useState(false);
         
         {user && user.email === "harsh.vardhan1_cs20@gla.ac.in" &&
         <Link to = {"/createItem"}>
-        <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
+        <p className='px-4 py-2 flex items-center gap-3  cursor-pointer
+         hover:bg-slate-100
           transition-all duration-100 ease-in-out
          text-textColor text-base' > New item <MdAdd /></p>
         </Link>
       }
       <ul
         
-         className=' flex flex-col items-center gap-8  '>
-        <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all
-         ease-in-out cursor-pointer'>Home</li>
-        <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all
-        ease-in-out cursor-pointer'>Menu</li>
-        <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all
-        ease-in-out cursor-pointer'>About us</li>
-        <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all
-        ease-in-out cursor-pointer'>
+         className=' flex flex-col   '>
+        <li className='text-base text-textColor
+         hover:text-headingColor duration-100 transition-all 
+         ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2 '>Home</li>
+        <li className='text-base text-textColor
+         hover:text-headingColor duration-100 transition-all
+        ease-in-out cursor-pointer  hover:bg-slate-100 px-4 py-2 '>Menu</li>
+        <li className='text-base text-textColor
+         hover:text-headingColor duration-100 transition-all
+        ease-in-out cursor-pointer  hover:bg-slate-100 px-4 py-2 '>About us</li>
+        <li className='text-base text-textColor
+         hover:text-headingColor duration-100 transition-all
+        ease-in-out cursor-pointer  hover:bg-slate-100 px-4 py-2 '>
         Services</li>
         </ul>
-        <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
-        transition-all duration-100 ease-in-out text-textColor text-base'>Log out <MdLogout /></p>
+        <p className=" m-2 p=2 rounded-md shadow-md px-4 py-2 flex items-center justify-center
+        bg-gray-200 gap-3 hover:bg-gray-300
+        cursor-pointer transition-all duration-100 ease-in-out text-textColor 
+        text-base"
+       onClick={logout}
+        >
+        Logout <MdLogout /></p>
        
        </motion.div>
       )
@@ -153,7 +182,8 @@ const [isMenu, setIsMenu] = useState(false);
         </div>
         </header>
    
-  )
-}
+  );
+};
 
-export default Header
+
+export default Header 
